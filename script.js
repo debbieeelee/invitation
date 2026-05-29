@@ -601,3 +601,33 @@
     init();
   }
 })();
+
+
+// ====== BGM 재생 및 토글 기능 ======
+document.addEventListener("DOMContentLoaded", () => {
+  const bgm = document.getElementById("bgm");
+  const openBtn = document.getElementById("curtain-open-btn");
+  const musicToggle = document.getElementById("music-toggle");
+
+  // 1. 초대장 열기 버튼 누르면 음악 시작
+  if (openBtn && bgm) {
+    openBtn.addEventListener("click", () => {
+      bgm.play().catch(e => console.log("자동재생 차단됨:", e));
+    });
+  }
+
+  // 2. 우측 상단 아이콘 누르면 음악 켜고 끄기
+  if (musicToggle && bgm) {
+    musicToggle.addEventListener("click", () => {
+      if (bgm.paused) {
+        bgm.play();
+        musicToggle.classList.remove("music-off");
+        musicToggle.classList.add("music-on");
+      } else {
+        bgm.pause();
+        musicToggle.classList.remove("music-on");
+        musicToggle.classList.add("music-off");
+      }
+    });
+  }
+});
