@@ -505,7 +505,7 @@
       tel.innerHTML = `<a href="tel:${c.wedding.tel}">${c.wedding.tel}</a>`;
     }
     if (mapImg) {
-      mapImg.src = 'images/location/1.jpg';
+      mapImg.src = 'images/location/1.JPG';
       mapImg.alt = `${c.wedding.venue} 약도`;
     }
 
