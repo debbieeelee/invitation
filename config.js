@@ -22,7 +22,7 @@ const CONFIG = {
   groom: {
     name: "이동훈",
     nameEn: "Donghun",
-    father: "이상헌",
+    father: "이상현",
     mother: "최순덕",
     fatherDeceased: false,
     motherDeceased: false
