@@ -631,3 +631,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+// iOS Safari에서 두 손가락으로 확대(Pinch-to-zoom)하는 행동 강제 차단
+document.documentElement.addEventListener('touchstart', function (event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
+// iOS Safari에서 화면을 더블 탭했을 때 확대되는 현상 강제 차단
+let lastTouchEnd = 0;
+document.documentElement.addEventListener('touchend', function (event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
