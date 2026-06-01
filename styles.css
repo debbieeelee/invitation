@@ -951,3 +951,30 @@ a {
 #music-toggle .icon-off { display: none; }
 #music-toggle.music-off .icon-on { display: none; }
 #music-toggle.music-off .icon-off { display: block; }
+
+/* 안내 박스 스타일 */
+.notice-section {
+  padding: 40px 20px;
+  background-color: #fff; /* 배경색 */
+  text-align: center;
+}
+.notice-box {
+  background-color: #f9f9f9; /* 박스 내부 연한 회색 */
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 450px;
+  margin: 0 auto;
+}
+.notice-box h3 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.notice-text {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  text-align: left; /* 문구는 왼쪽 정렬이 읽기 편합니다 */
+}
