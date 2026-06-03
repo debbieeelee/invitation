@@ -997,6 +997,10 @@ a {
   border-radius: 150% 0 150% 0;
   animation: fall linear infinite;
   opacity: 0;
+
+   /* 🚀 GPU 하드웨어 가속을 활성화하여 스크롤 버벅임 방지 */
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
 }
 
 @keyframes fall {
