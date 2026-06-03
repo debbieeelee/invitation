@@ -583,7 +583,8 @@
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.01, rootMargin: '0px 0px 100px 0px' }
+      // script.js 수정 전
     );
 
     $$('.fade-in').forEach(el => scrollObserver.observe(el));
