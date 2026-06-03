@@ -651,7 +651,7 @@ document.documentElement.addEventListener('touchend', function (event) {
 }, false);
 
 
-// 벚꽃 추가
+// ====== 벚꽃 추가 기능 ======
 function createPetalsLocal() {
   const container = document.querySelector('.cherry-blossom-local-container');
   if (!container) return; // 로컬 컨테이너를 찾지 못함
@@ -668,6 +668,9 @@ function createPetalsLocal() {
     const size = Math.random() * 8 + 3; // 3~11px
     petal.style.width = `${size}px`;
     petal.style.height = `${size}px`;
+
+    // ★★★ 핵심 수정: 시작 위치(top)를 이미지 전체 높이 내에서 랜덤 설정 ★★★
+    petal.style.top = `${Math.random() * 100}%`; 
 
     // 이미지 너비 안에서 랜덤 시작 위치 설정
     petal.style.left = `${Math.random() * 100}%`;
