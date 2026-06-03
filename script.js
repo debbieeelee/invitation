@@ -583,9 +583,8 @@
           }
         });
       },
-      { threshold: 0.01, rootMargin: '0px 0px 100px 0px' }
-      // script.js 수정 전
-    );
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
+      );
 
     $$('.fade-in').forEach(el => scrollObserver.observe(el));
   }
@@ -660,7 +659,7 @@ function createPetalsLocal() {
   // 기존 꽃잎 제거 (재실행 방지)
   container.innerHTML = '';
 
-  const petalCount = 30; // 작은 공간이므로 꽃잎 수 감소
+  const petalCount = 15; // 작은 공간이므로 꽃잎 수 감소
   for (let i = 0; i < petalCount; i++) {
     const petal = document.createElement('div');
     petal.classList.add('petal');
