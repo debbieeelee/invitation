@@ -651,42 +651,47 @@ document.documentElement.addEventListener('touchend', function (event) {
 }, false);
 
 
-// ====== 벚꽃 추가 기능 ======
+// ====== 벚꽃 추가 기능 (카카오톡 스크롤 최적화 최종본) ======
 function createPetalsLocal() {
   const container = document.querySelector('.cherry-blossom-local-container');
-  if (!container) return; // 로컬 컨테이너를 찾지 못함
+  if (!container) return; 
 
-  // 기존 꽃잎 제거 (재실행 방지)
   container.innerHTML = '';
 
-  const petalCount = 10; // 모바일 렉 방지를 위해 가벼운 개수로 유지
+  // 카톡 인앱 브라우저 최적화를 위해 딱 8개만 균일하게 사용
+  const petalCount = 8; 
+  
   for (let i = 0; i < petalCount; i++) {
     const petal = document.createElement('div');
     petal.classList.add('petal');
 
-    // 작은 공간에 맞게 크기 조절
-    const size = Math.random() * 8 + 3; // 3~11px
+    // 모바일 프로세서가 처리하기 가장 가벼운 사이즈 (4px~10px)
+    const size = Math.random() * 6 + 4; 
     petal.style.width = `${size}px`;
     petal.style.height = `${size}px`;
 
-    // 1. 시작 위치(Y축)를 이미지 높이 전체에 골고루 분포 (이미 떨어지고 있는 느낌 유도)
+    // 켜자마자 화면 전체에 흩뿌려져 있도록 설정
     petal.style.top = `${Math.random() * 100}%`; 
-
-    // 2. 이미지 너비(X축) 안에서 랜덤 시작 위치 설정
     petal.style.left = `${Math.random() * 100}%`;
 
-    // 3. 애니메이션 속도 설정 (2~6초 사이)
-    petal.style.animationDuration = `${Math.random() * 4 + 2}s`; 
-
-    // ❌ 기존에 가만히 멈추게 만들던 petal.style.animationDelay 코드를 과감히 삭제했습니다!
-    // delay가 없기 때문에 모든 꽃잎이 로드되자마자 멈춤 없이 즉시 아래로 떨어집니다.
-
-    // 랜덤한 투명도 설정
-    petal.style.opacity = Math.random() * 0.8 + 0.2; 
+    // CSS 가상 스레드에서만 돌도록 속도 고정 (자바스크립트 연산 개입 최소화)
+    // 3초~6초 사이로 부드럽게 떨어지게 만듭니다.
+    petal.style.animationDuration = `${Math.random() * 3 + 3}s`;
 
     container.appendChild(petal);
+
+    // ✨ [카톡 렉 해결의 핵심 코딩]
+    // 꽃잎이 바닥(100%)에 닿아 한 주기가 끝날 때마다 자바스크립트 연산을 거치지 않고,
+    // 브라우저 자체 내장 이벤트로 좌우 위치만 살짝 바꿔주며 무한 재활용합니다.
+    petal.addEventListener('animationiteration', () => {
+      petal.style.left = `${Math.random() * 100}%`;
+    });
   }
 }
 
-// 페이지 로드 시 로컬 벚꽃잎 생성 함수 실행
-window.addEventListener('load', createPetalsLocal);
+// 🚨 [타이밍 버그 수정] 
+// 이미지 로딩과 겹쳐서 레이아웃 렉이 걸리지 않도록, 
+// 페이지가 켜지고 1.5초 뒤에 벚꽃 기능이 아주 부드럽게 발동되도록 지연 처리를 걸어줍니다.
+window.addEventListener('load', () => {
+  setTimeout(createPetalsLocal, 1500);
+});
