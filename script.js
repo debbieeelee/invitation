@@ -115,14 +115,22 @@
     if (names) names.textContent = `${c.groom.name} & ${c.bride.name}`;
     if (date) date.textContent = `${dateInfo.year}. ${String(dateInfo.month).padStart(2, '0')}. ${String(dateInfo.day).padStart(2, '0')}`;
 
-    // 열기 버튼
+// 열기 버튼 (수정본)
     const btn = $('#curtain-open-btn');
     if (btn) {
       btn.addEventListener('click', () => {
         overlay.classList.add('fade-out');
-        document.body.style.overflow = '';
+        
+        // 🚀 [주소창 프리징 해결 핵심] body뿐만 아니라 html 태그까지 확실하게 스크롤을 열어줍니다.
+        document.body.style.overflow = 'visible';
+        document.documentElement.style.overflow = 'visible'; 
+        
         overlay.addEventListener('transitionend', () => {
           overlay.remove();
+          
+          // 🚀 [터치 주도권 강제 회수] 커튼이 완전히 사라진 직후, 브라우저가 본문의 실제 높이를 
+          // 정확하게 인지하여 주소창과 스크롤이 동시에 즉각 반응하도록 이벤트를 한 번 튕겨줍니다.
+          window.dispatchEvent(new Event('resize'));
         }, { once: true });
       });
     }
