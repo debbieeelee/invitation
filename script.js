@@ -649,3 +649,34 @@ document.documentElement.addEventListener('touchend', function (event) {
     }
     lastTouchEnd = now;
 }, false);
+
+// script.js 맨 아래에 추가할 코드
+function createPetals() {
+  const container = document.querySelector('.cherry-blossom-container');
+  if (!container) return; // 컨테이너가 없으면 실행 안 함
+
+  for (let i = 0; i < 50; i++) { // 벚꽃잎 개수 조절
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+
+    // 랜덤한 크기 설정
+    const size = Math.random() * 10 + 5; // 5~15px
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size}px`;
+
+    // 랜덤한 시작 위치 설정 (가로)
+    petal.style.left = `${Math.random() * 100}vw`;
+
+    // 랜덤한 애니메이션 속도 및 지연 설정
+    petal.style.animationDuration = `${Math.random() * 5 + 3}s`; // 3~8s
+    petal.style.animationDelay = `${Math.random() * 10}s`;
+
+    // 랜덤한 투명도 설정
+    petal.style.opacity = Math.random();
+
+    container.appendChild(petal);
+  }
+}
+
+// 페이지 로드 시 벚꽃잎 생성 함수 실행
+window.addEventListener('load', createPetals);
