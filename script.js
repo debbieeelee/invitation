@@ -583,7 +583,7 @@
           }
         });
       },
-      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
+      { threshold: 0, rootMargin: '50px 0px 50px 0px' }
       );
 
     $$('.fade-in').forEach(el => scrollObserver.observe(el));
