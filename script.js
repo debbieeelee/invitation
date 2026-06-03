@@ -650,7 +650,6 @@ document.documentElement.addEventListener('touchend', function (event) {
     lastTouchEnd = now;
 }, false);
 
-
 // ====== 벚꽃 추가 기능 ======
 function createPetalsLocal() {
   const container = document.querySelector('.cherry-blossom-local-container');
@@ -659,7 +658,7 @@ function createPetalsLocal() {
   // 기존 꽃잎 제거 (재실행 방지)
   container.innerHTML = '';
 
-  const petalCount = 15; // 작은 공간이므로 꽃잎 수 감소
+  const petalCount = 10; // 모바일 렉 방지를 위해 가벼운 개수로 유지
   for (let i = 0; i < petalCount; i++) {
     const petal = document.createElement('div');
     petal.classList.add('petal');
@@ -669,18 +668,20 @@ function createPetalsLocal() {
     petal.style.width = `${size}px`;
     petal.style.height = `${size}px`;
 
-    // ★★★ 핵심 수정: 시작 위치(top)를 이미지 전체 높이 내에서 랜덤 설정 ★★★
+    // 1. 시작 위치(Y축)를 이미지 높이 전체에 골고루 분포 (이미 떨어지고 있는 느낌 유도)
     petal.style.top = `${Math.random() * 100}%`; 
 
-    // 이미지 너비 안에서 랜덤 시작 위치 설정
+    // 2. 이미지 너비(X축) 안에서 랜덤 시작 위치 설정
     petal.style.left = `${Math.random() * 100}%`;
 
-    // 애니메이션 속도 및 지연 조절 (작은 공간에서 더 빨리 움직이게)
-    petal.style.animationDuration = `${Math.random() * 4 + 2}s`; // 2~6s
-    petal.style.animationDelay = `${Math.random() * 6}s`;
+    // 3. 애니메이션 속도 설정 (2~6초 사이)
+    petal.style.animationDuration = `${Math.random() * 4 + 2}s`; 
+
+    // ❌ 기존에 가만히 멈추게 만들던 petal.style.animationDelay 코드를 과감히 삭제했습니다!
+    // delay가 없기 때문에 모든 꽃잎이 로드되자마자 멈춤 없이 즉시 아래로 떨어집니다.
 
     // 랜덤한 투명도 설정
-    petal.style.opacity = Math.random() * 0.8 + 0.2; // 더 선명하게
+    petal.style.opacity = Math.random() * 0.8 + 0.2; 
 
     container.appendChild(petal);
   }
