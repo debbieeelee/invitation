@@ -978,3 +978,42 @@ a {
   line-height: 1.6;
   text-align: left; /* 문구는 왼쪽 정렬이 읽기 편합니다 */
 }
+
+
+/* styles.css 맨 아래에 추가할 코드 */
+.cherry-blossom-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 클릭을 막지 않음 */
+  z-index: 9999; /* 다른 요소 위에 표시 */
+}
+
+.petal {
+  position: absolute;
+  background-color: #ffb7c5; /* 벚꽃잎 색상 */
+  border-radius: 150% 0 150% 0; /* 벚꽃잎 모양 */
+  animation: fall linear infinite;
+  opacity: 0;
+}
+
+@keyframes fall {
+  0% {
+    top: -10px;
+    transform: translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100vh;
+    transform: translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
