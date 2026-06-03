@@ -650,6 +650,7 @@ document.documentElement.addEventListener('touchend', function (event) {
     lastTouchEnd = now;
 }, false);
 
+
 // ====== 벚꽃 추가 기능 ======
 function createPetalsLocal() {
   const container = document.querySelector('.cherry-blossom-local-container');
