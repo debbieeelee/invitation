@@ -362,7 +362,7 @@ function buildGallery(images) {
     return;
   }
 
-  const initialCount = 6;
+  const initialCount = Math.floor(images.length / 3) * 3 || 3;
   function renderImages(count) {
     grid.innerHTML = images.slice(0, count).map((src, i) => 
       `<div class="gallery-item" data-index="${i}">
