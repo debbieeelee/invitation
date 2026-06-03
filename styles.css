@@ -16,6 +16,10 @@ html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+   
+/* 🚀 [주소창 렉 해결 핵심] 주소창 가변과 상관없이 무조건 부드러운 스크롤 강제 활성화 */
+  -webkit-overflow-scrolling: touch;
+   
 }
 
 body {
@@ -27,7 +31,11 @@ body {
   letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+/* 🚀 [주소창 렉 해결 핵심] 터치가 굳지 않도록 스크롤 영역을 완전히 보장 */
   overflow-x: hidden;
+  overflow-y: auto; 
+  min-height: 100%;
 }
 
 /* Safe area support */
@@ -128,7 +136,7 @@ a {
 .hero {
   position: relative;
   width: 100%;
-  height: 100svh;
+  height: 100dvh;
   min-height: 600px;
   max-height: 900px;
   overflow: hidden;
