@@ -979,22 +979,22 @@ a {
   text-align: left; /* 문구는 왼쪽 정렬이 읽기 편합니다 */
 }
 
-
-/* styles.css 맨 아래에 추가할 코드 */
-.cherry-blossom-container {
-  position: fixed;
+/* styles.css - 기존 글로벌 컨테이너 제거 후 로컬 컨테이너 추가 */
+.cherry-blossom-local-container {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* 클릭을 막지 않음 */
-  z-index: 9999; /* 다른 요소 위에 표시 */
+  pointer-events: none; /* 클릭 방지 */
+  z-index: 10; /* 이미지 바로 위에 표시 */
 }
 
+/* 아래 .petal 및 @keyframes fall은 그대로 유지 */
 .petal {
   position: absolute;
-  background-color: #ffb7c5; /* 벚꽃잎 색상 */
-  border-radius: 150% 0 150% 0; /* 벚꽃잎 모양 */
+  background-color: #ffb7c5;
+  border-radius: 150% 0 150% 0;
   animation: fall linear infinite;
   opacity: 0;
 }
@@ -1012,7 +1012,7 @@ a {
     opacity: 1;
   }
   100% {
-    top: 100vh;
+    top: 100%; /* 로컬 컨테이너 하단까지 */
     transform: translateX(100px) rotate(360deg);
     opacity: 0;
   }
