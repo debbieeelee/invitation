@@ -555,7 +555,7 @@ function buildAccountGroup(side, accounts, label) {
   }
 }
 
-// ── Scroll Animations (카카오톡 최적화 리팩토링 최종형) ──
+// ── Scroll Animations (하단 렉 및 안 뜨는 현상 최종 해결본) ──
 let scrollObserver = null;
 function initScrollAnimations() {
   if (scrollObserver) {
@@ -564,21 +564,23 @@ function initScrollAnimations() {
 
   scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+      // 🚀 변경 1: 확실하게 화면에 들어왔을 때만 보이기 클래스를 추가합니다.
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        scrollObserver.unobserve(entry.target);
+      } else {
+        // 🚀 변경 2: 화면 밖으로 완전히 벗어나면 클래스를 떼서, 스크롤을 다시 올렸다 내릴 때도 자연스럽게 작동하게 만듭니다.
+        // unobserve를 제거하여 감지기가 중간에 일방적으로 감시를 포기하는 버그를 원천 차단합니다.
+        entry.target.classList.remove('visible'); 
       }
     });
   }, { 
-    threshold: 0, 
-    rootMargin: '200px 0px 200px 0px' 
+    threshold: 0.1, // 🚀 변경 3: 0이 아니라 최소 10% 이상 화면에 들어왔을 때 정식 감지되도록 기준을 눕힙니다.
+    rootMargin: '0px 0px -50px 0px' // 모바일 화면 하단에서 50px 정도 들어왔을 때 자연스럽게 스르륵 켜지도록 마진 조정
   });
 
   const targets = document.querySelectorAll('.fade-in');
   targets.forEach(el => {
-    if (!el.classList.contains('visible')) {
-      scrollObserver.observe(el);
-    }
+    scrollObserver.observe(el);
   });
 }
 
