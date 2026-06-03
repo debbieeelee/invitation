@@ -167,6 +167,36 @@
 
     // Re-observe newly added elements for scroll animations
     reobserveAnimations();
+
+function initScrollAnimations() {
+  // 기존에 돌고 있던 관찰자가 있다면 청소해서 중복 누수 방지
+  if (scrollObserver) {
+    scrollObserver.disconnect();
+  }
+
+  scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // 카톡 주소창이 출렁거려도 오작동하지 않도록 가볍게 감지
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        scrollObserver.unobserve(entry.target); 
+      }
+    });
+  }, { 
+    threshold: 0, 
+    // rootMargin을 더 넓게 주어 사용자가 도달하기 200px 전 미리 그려버립니다.
+    rootMargin: '200px 0px 200px 0px' 
+  });
+
+  // 이미 화면에 나타난 요소(.visible)는 제외하고 새로 관찰 시작
+  const targets = document.querySelectorAll('.fade-in');
+  targets.forEach(el => {
+    if (!el.classList.contains('visible')) {
+      scrollObserver.observe(el);
+    }
+  });
+}
+    
   }
 
   // ── Loading State ──
