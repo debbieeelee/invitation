@@ -69,7 +69,7 @@ a {
   max-width: 480px;
   margin: 0 auto;
   background: #fff;
-  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
 }
 
