@@ -113,6 +113,10 @@ a {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+
+  /* 🚀 카카오톡 브라우저 UI 변경 시 뚝뚝 끊기는 연산 렉 방지 */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .fade-in.visible {
