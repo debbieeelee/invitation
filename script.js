@@ -26,36 +26,19 @@
     return `${period} ${hour12}시${m > 0 ? ' ' + m + '분' : ''}`;
   }
 
-  // ── Image Loading ──
-  function loadImagesFromFolder(folder, maxAttempts = 50) {
-    return new Promise(resolve => {
-        const images = [];
-        let current = 1;
-        let consecutiveFails = 0;
-
-        function tryNext() {
-            if (current > maxAttempts || consecutiveFails >= 3) {
-                resolve(images);
-                return;
-            }
-            const img = new Image();
-            const path = `images/${folder}/${current}.jpg`;
-            img.onload = function() {
-                images.push(path);
-                consecutiveFails = 0;
-                current++;
-                tryNext();
-            };
-            img.onerror = function() {
-                consecutiveFails++;
-                current++;
-                tryNext();
-            };
-            img.src = path;
-        }
-
-        tryNext();
+  // ── Image Loading (수정됨: 순차 → 병렬 방식) ──
+  function loadImagesFromFolder(folder, maxAttempts = 30) {
+    const checkOne = (i) => new Promise(resolve => {
+      const img = new Image();
+      const path = `images/${folder}/${i}.jpg`;
+      img.onload = () => resolve(path);
+      img.onerror = () => resolve(null);
+      img.src = path;
     });
+
+    return Promise.all(
+      Array.from({ length: maxAttempts }, (_, i) => checkOne(i + 1))
+    ).then(results => results.filter(Boolean));
   }
 
   // ── Toast ──
@@ -613,7 +596,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         bgm.pause();
         musicToggle.classList.remove("music-on");
-        musicToggle.classList.off("music-off");
+        musicToggle.classList.add("music-off"); // 수정됨: classList.off()는 존재하지 않는 메서드라 음소거 토글이 동작하지 않았음
       }
     });
   }
