@@ -209,7 +209,7 @@ function buildInvitation(c, dateInfo, timeText) {
       const motherName = side.mother;
       const fatherDec = side.fatherDeceased ? ' class="deceased"' : '';
       const motherDec = side.motherDeceased ? ' class="deceased"' : '';
-      return `<span${fatherDec}>${fatherName}</span> <span class="dot"></span> <span${motherDec}>${motherName}</span><span style="color:#999;margin-left:4px">의 ${side === c.groom ? '아들' : '딸  '}</span> <strong>${side.name}</strong>`;
+      return `<span${fatherDec}>${fatherName}</span> <span class="dot"></span> <span${motherDec}>${motherName}</span><span style="color:#999;margin-left:4px">의 ${side === c.groom ? '아들' : '딸&nbsp;&nbsp;'}</span> <strong>${side.name}</strong>`;
     }
     parents.innerHTML = `
       <div class="parent-line">${parentLine(c.groom)}</div>
