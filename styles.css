@@ -1033,3 +1033,10 @@ a {
     opacity: 0;
   }
 }
+
+.invitation-parents .child-label {
+  display: inline-block;
+  width: 2.2em;
+  text-align: center;
+  color: #999;
+}
