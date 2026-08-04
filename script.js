@@ -645,3 +645,11 @@ function createPetalsLocal() {
 window.addEventListener('load', () => {
   setTimeout(createPetalsLocal, 1500);
 });
+
+document.addEventListener('touchstart', function firstTouchPlayBgm() {
+  const bgm = document.getElementById('bgm');
+  if (bgm && bgm.paused) {
+    bgm.play().catch(e => console.log('재생 실패:', e));
+  }
+  document.removeEventListener('touchstart', firstTouchPlayBgm);
+}, { once: true, passive: true });
