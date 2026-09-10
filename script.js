@@ -653,3 +653,14 @@ document.addEventListener('touchstart', function firstTouchPlayBgm() {
   }
   document.removeEventListener('touchstart', firstTouchPlayBgm);
 }, { once: true, passive: true });
+
+// ====== 글씨 크게 보기 토글 ======
+document.addEventListener('DOMContentLoaded', () => {
+  const fontToggle = document.getElementById('font-toggle');
+  if (fontToggle) {
+    fontToggle.addEventListener('click', () => {
+      document.body.classList.toggle('font-large');
+      fontToggle.textContent = document.body.classList.contains('font-large') ? '작은글씨' : '큰글씨';
+    });
+  }
+});
