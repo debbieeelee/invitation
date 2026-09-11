@@ -26,32 +26,6 @@
   <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"></script>
 
   <script>
-  document.getElementById('kakao-share-btn').addEventListener('click', function () {
-    Kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
-        title: '이선우와 이동훈 결혼합니다',
-        description: '예식일 : 11월 1일 일요일 11시 30분\n예식장소 : 더채플앳청담 6F 채플홀',
-        imageUrl: 'https://debbieeelee.github.io/invitation/images/og/2.jpg',
-        link: {
-          mobileWebUrl: 'https://debbieeelee.github.io/invitation/',
-          webUrl: 'https://debbieeelee.github.io/invitation/',
-        },
-      },
-      buttons: [
-        {
-          title: '자세히 보기',
-          link: {
-            mobileWebUrl: 'https://debbieeelee.github.io/invitation/',
-            webUrl: 'https://debbieeelee.github.io/invitation/',
-          },
-        },
-      ],
-    });
-  });
-  </script>
-  
-  <script>
     Kakao.init('443ffa1e7f60958cfbb16d72ccf5a27f'); // JavaScript 키 전체 붙여넣기
   </script>
   
@@ -286,5 +260,33 @@
 <!-- Scripts -->
 <script src="config.js"></script>
 <script src="script.js"></script>
+  
+  <script>
+  document.getElementById('kakao-share-btn').addEventListener('click', function () {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '이선우와 이동훈 결혼합니다',
+        description: '예식일 : 11월 1일 일요일 11시 30분\n예식장소 : 더채플앳청담 6F 채플홀',
+        imageUrl: 'https://debbieeelee.github.io/invitation/images/og/2.jpg',
+        link: {
+          mobileWebUrl: 'https://debbieeelee.github.io/invitation/',
+          webUrl: 'https://debbieeelee.github.io/invitation/',
+        },
+      },
+      buttons: [
+        {
+          title: '자세히 보기',
+          link: {
+            mobileWebUrl: 'https://debbieeelee.github.io/invitation/',
+            webUrl: 'https://debbieeelee.github.io/invitation/',
+          },
+        },
+      ],
+    });
+  });
+  </script>
+  
+  
 </body>
 </html>
