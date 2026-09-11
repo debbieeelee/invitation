@@ -1102,3 +1102,26 @@ body.font-large .account-detail { font-size: 17px; }
 body.font-large .account-role { font-size: 14px; }
 body.font-large .footer-text,
 body.font-large .footer-bgm-credit { font-size: 13px; }
+
+.kakao-share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+  margin: 24px auto;
+  padding: 14px 20px;
+  background-color: #FEE500;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.kakao-share-button:active {
+  opacity: 0.8;
+}
