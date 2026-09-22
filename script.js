@@ -27,7 +27,7 @@
   }
 
   // ── Image Loading (수정됨: 순차 → 병렬 방식) ──
-  function loadImagesFromFolder(folder, maxAttempts = 30) {
+  function loadImagesFromFolder(folder, maxAttempts = 40) {
     const checkOne = (i) => new Promise(resolve => {
       const img = new Image();
       const path = `images/${folder}/${i}.jpg`;
@@ -345,7 +345,7 @@ function buildGallery(images) {
     return;
   }
 
-  const initialCount = Math.floor(images.length / 3) * 3 || 3;
+  const initialCount = Math.min(12, images.length);
   function renderImages(count) {
     grid.innerHTML = images.slice(0, count).map((src, i) => 
       `<div class="gallery-item" data-index="${i}">
