@@ -1088,6 +1088,8 @@ body.font-large .account-detail { font-size: 17px; }
 body.font-large .account-role { font-size: 14px; }
 body.font-large .footer-text,
 body.font-large .footer-bgm-credit { font-size: 13px; }
+body.font-large .hero-invite-date { font-size: 19px; }
+body.font-large .hero-invite-venue { font-size: 17px; }
 
 .kakao-share-button {
   display: flex;
@@ -1111,3 +1113,26 @@ body.font-large .footer-bgm-credit { font-size: 13px; }
 .kakao-share-button:active {
   opacity: 0.8;
 }
+
+
+.hero-invite-text {
+  text-align: center;
+  padding: 4px 28px 20px;
+  background: #fff;
+}
+
+.hero-invite-date {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.hero-invite-venue {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: #666;
+}
+
