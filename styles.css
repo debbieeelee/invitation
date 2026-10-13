@@ -872,7 +872,7 @@ a {
   z-index: 9999;
   background: rgba(0, 0, 0, 0.85);
   display: flex;
-  align-items: center;f
+  align-items: center;
   justify-content: center;
   opacity: 1;
   transition: opacity 0.6s ease;
