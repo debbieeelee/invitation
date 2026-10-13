@@ -675,27 +675,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const shareTitle = '이선우 💙 이동훈 결혼합니다';
   const shareImageUrl = 'https://debbieeelee.github.io/invitation/images/og/2.jpg';
 
+  let cachedFile = null;
+  fetch(shareImageUrl).then(r => r.blob())
+    .then(b => cachedFile = new File([b], 'invitation.jpg', { type: b.type }))
+    .catch(() => {});
+
   wechatBtn?.addEventListener('click', async () => {
     try {
-      const res = await fetch(shareImageUrl);
-      const blob = await res.blob();
-      const file = new File([blob], 'invitation.jpg', { type: blob.type });
-
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({
-          files: [file],
-          title: shareTitle,
-          text: `${shareTitle}\n${shareUrl}`
-        });
+      if (cachedFile && navigator.canShare?.({ files: [cachedFile] })) {
+        await navigator.share({ files: [cachedFile], title: shareTitle, text: `${shareTitle}\n${shareUrl}` });
         return;
       }
-
-      if (navigator.share) {
-        await navigator.share({ title: shareTitle, url: shareUrl });
-        return;
-      }
-    } catch (e) { /* 취소 또는 미지원 -> QR로 폴백 */ }
-
+      if (navigator.share) { await navigator.share({ title: shareTitle, url: shareUrl }); return; }
+    } catch (e) {}
     qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(shareUrl)}`;
     qrModal.style.display = 'flex';
   });
