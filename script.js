@@ -664,3 +664,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const wechatBtn = document.getElementById('wechat-share-btn');
+  const qrModal = document.getElementById('wechat-qr-modal');
+  const qrImg = document.getElementById('wechat-qr-img');
+  const qrClose = document.getElementById('wechat-qr-close');
+  const shareUrl = 'https://debbieeelee.github.io/invitation/?v=3';
+  const shareTitle = '이선우 💙 이동훈 결혼합니다';
+
+  wechatBtn?.addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: shareTitle, url: shareUrl });
+        return;
+      } catch (e) { /* 사용자가 취소했거나 미지원 -> QR로 폴백 */ }
+    }
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(shareUrl)}`;
+    qrModal.style.display = 'flex';
+  });
+
+  qrClose?.addEventListener('click', () => qrModal.style.display = 'none');
+  qrModal?.addEventListener('click', (e) => { if (e.target === qrModal) qrModal.style.display = 'none'; });
+});
