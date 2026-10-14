@@ -238,7 +238,7 @@ function buildCountdown(c, dateInfo) {
       if (hoursEl) hoursEl.textContent = '0';
       if (minsEl) minsEl.textContent = '0';
       if (secsEl) secsEl.textContent = '0';
-      if (ddayEl) ddayEl.textContent = '결혼식 당일입니다.;
+      if (ddayEl) ddayEl.textContent = '결혼식 당일입니다';
       return;
     }
 
